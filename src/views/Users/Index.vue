@@ -43,7 +43,7 @@
             @input="onChangeSearchInput"
             type="text"
             class="rounded-md border border-slate-200 px-4 py-1 pl-9 pr-4 text-sm text-slate-400 outline-none focus:border-slate-400"
-            placeholder="Поиск..."
+            placeholder="Search..."
           />
         </div>
       </div>
