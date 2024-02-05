@@ -57,13 +57,15 @@
     </div>
   </div>
 
-  <div class="relative mx-auto mt-5 w-6/12 overflow-x-auto">
+  <div class="relative mx-auto mt-5 w-10/12 overflow-x-auto">
     <table class="w-full text-left text-sm text-gray-500">
       <thead class="bg-slate-100 text-xs uppercase text-gray-700">
         <tr>
           <th scope="col" class="px-6 py-3">ID</th>
           <th scope="col" class="px-6 py-3">Name</th>
           <th scope="col" class="px-6 py-3">Email</th>
+          <th scope="col" class="px-6 py-3">Created</th>
+          <th scope="col" class="px-6 py-3">Updated</th>
           <th scope="col" class="px-6 py-3">Actions</th>
         </tr>
       </thead>
@@ -80,8 +82,10 @@
           >
             {{ user.id }}
           </th>
-          <td class="px-6 py-4">{{ user.name }}</td>
-          <td class="px-6 py-4">{{ user.email }}</td>
+          <td class="truncate px-6 py-4">{{ user.name }}</td>
+          <td class="truncate px-6 py-4">{{ user.email }}</td>
+          <td class="truncate px-6 py-4">{{ user.created_at }}</td>
+          <td class="truncate px-6 py-4">{{ user.updated_at }}</td>
           <td class="px-6 py-4">
             <div class="flex gap-3">
               <router-link
