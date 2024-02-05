@@ -10,33 +10,71 @@
         >
           {{ authStore.error }}
         </div>
-        <input
-          v-model="email"
-          :class="{
-            'border-red-500': [
-              'The email field is required',
-              'The email has already been taken',
-              'The email field must be a valid email address',
-              'Invalid credentials'
-            ].includes(authStore.error)
-          }"
-          type="text"
-          class="border-1 rounded-lg border p-2 focus:outline-none"
-          placeholder="Email"
-        />
-        <input
-          v-model="password"
-          :class="{
-            'border-red-500': [
-              'The password field is required',
-              'The password field must be at least 6 characters',
-              'Invalid credentials'
-            ].includes(authStore.error)
-          }"
-          type="password"
-          class="border-1 rounded-lg border p-2 focus:outline-none"
-          placeholder="Password"
-        />
+        <div class="flex items-center">
+          <div class="relative w-full">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="absolute left-2.5 top-2 h-6 w-6 text-slate-400"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"
+              />
+            </svg>
+
+            <input
+              v-model="email"
+              :class="{
+                'border-red-500': [
+                  'The email field is required',
+                  'The email has already been taken',
+                  'The email field must be a valid email address',
+                  'Invalid credentials'
+                ].includes(authStore.error)
+              }"
+              type="text"
+              class="border-1 w-full rounded-lg border p-2 pl-10 text-slate-400 focus:outline-none"
+              placeholder="Email"
+            />
+          </div>
+        </div>
+        <div class="flex items-center">
+          <div class="relative w-full">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="absolute left-2.5 top-2 h-6 w-6 text-slate-400"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+              />
+            </svg>
+
+            <input
+              v-model="password"
+              :class="{
+                'border-red-500': [
+                  'The password field is required',
+                  'The password field must be at least 6 characters',
+                  'Invalid credentials'
+                ].includes(authStore.error)
+              }"
+              type="password"
+              class="border-1 w-full rounded-lg border p-2 pl-10 text-slate-400 focus:outline-none"
+              placeholder="Password"
+            />
+          </div>
+        </div>
         <div v-if="authStore.loader" class="mt-5 flex justify-center">
           <AppLoader />
         </div>

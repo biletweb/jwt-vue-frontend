@@ -26,7 +26,7 @@
   </div>
 
   <div class="mt-5 flex justify-center">
-    <div class="w-6/12 rounded-2xl border bg-white p-5">
+    <div class="w-4/12 rounded-2xl border bg-white p-5">
       <div class="flex flex-col gap-5">
         <div
           v-if="error"
@@ -34,31 +34,70 @@
         >
           {{ error }}
         </div>
-        <input
-          type="text"
-          v-model="user.name"
-          :class="{
-            'border-red-500': [
-              'The name field is required',
-              'The name field must be between 2 and 100 characters'
-            ].includes(error)
-          }"
-          class="border-1 rounded-lg border p-2 focus:outline-none"
-          placeholder="Name"
-        />
-        <input
-          type="text"
-          v-model="user.email"
-          :class="{
-            'border-red-500': [
-              'The email field is required',
-              'The email has already been taken',
-              'The email field must be a valid email address'
-            ].includes(error)
-          }"
-          class="border-1 rounded-lg border p-2 focus:outline-none"
-          placeholder="Email"
-        />
+
+        <div class="flex items-center">
+          <div class="relative w-full">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="absolute left-2.5 top-2 h-6 w-6 text-slate-400"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+              />
+            </svg>
+
+            <input
+              type="text"
+              v-model="user.name"
+              :class="{
+                'border-red-500': [
+                  'The name field is required',
+                  'The name field must be between 2 and 100 characters'
+                ].includes(error)
+              }"
+              class="border-1 w-full rounded-lg border p-2 pl-10 text-slate-400 focus:outline-none"
+              placeholder="Name"
+            />
+          </div>
+        </div>
+        <div class="flex items-center">
+          <div class="relative w-full">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="absolute left-2.5 top-2 h-6 w-6 text-slate-400"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25"
+              />
+            </svg>
+
+            <input
+              type="text"
+              v-model="user.email"
+              :class="{
+                'border-red-500': [
+                  'The email field is required',
+                  'The email has already been taken',
+                  'The email field must be a valid email address'
+                ].includes(error)
+              }"
+              class="border-1 w-full rounded-lg border p-2 pl-10 text-slate-400 focus:outline-none"
+              placeholder="Email"
+            />
+          </div>
+        </div>
         <button
           @click="updateUser"
           class="mt-5 w-full rounded-lg bg-green-500 p-2 text-white hover:bg-green-600"
