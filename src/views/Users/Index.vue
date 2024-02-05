@@ -170,9 +170,10 @@
       @click="loadPage(currentPage - 1)"
       :disabled="currentPage === 1"
       :class="{
-        'mx-1 rounded bg-blue-300 px-2 py-1 text-white': currentPage === 1,
-        'mx-1 rounded bg-blue-500 px-2 py-1 text-white': currentPage !== 1
+        'bg-green-300': currentPage === 1,
+        'bg-green-500': currentPage !== 1
       }"
+      class="mx-1 rounded text-white"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -196,9 +197,10 @@
           @click="loadPage(page)"
           :disabled="currentPage === page"
           :class="{
-            'rounded bg-blue-500 text-white': currentPage === page,
-            'mx-1 px-2 py-1': true
+            'rounded bg-green-500 text-white': currentPage === page,
+            'text-green-500 opacity-50': currentPage !== page
           }"
+          class="mx-1 px-2 py-1"
         >
           {{ page }}
         </button>
@@ -210,9 +212,10 @@
           @click="loadPage(page)"
           :disabled="currentPage === page"
           :class="{
-            'rounded bg-blue-500 text-white': currentPage === page,
-            'mx-1 px-2 py-1': true
+            'rounded bg-green-500 text-white': currentPage === page,
+            'text-green-500 opacity-50': currentPage !== page
           }"
+          class="mx-1 px-2 py-1"
         >
           {{ page }}
         </button>
@@ -223,11 +226,10 @@
       @click="loadPage(currentPage + 1)"
       :disabled="currentPage === totalPages"
       :class="{
-        'mx-1 rounded bg-blue-300 px-2 py-1 text-white':
-          currentPage === totalPages,
-        'mx-1 rounded bg-blue-500 px-2 py-1 text-white':
-          currentPage !== totalPages
+        'bg-green-300': currentPage === totalPages,
+        'bg-green-500': currentPage !== totalPages
       }"
+      class="mx-1 rounded text-white"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
