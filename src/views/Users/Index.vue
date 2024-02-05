@@ -162,12 +162,14 @@
         <tr>
           <td
             v-if="users.length > 0"
-            colspan="4"
-            class="bg-white p-1 text-center"
+            colspan="6"
+            class="bg-white p-1 text-center uppercase"
           >
             Loading...
           </td>
-          <td v-else colspan="4" class="bg-white p-1 text-center">No users</td>
+          <td v-else colspan="6" class="bg-white p-1 text-center uppercase">
+            No users
+          </td>
         </tr>
       </tbody>
     </table>
