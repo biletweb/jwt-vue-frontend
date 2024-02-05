@@ -21,7 +21,30 @@
       <span class="text-2xl">Users</span>
     </div>
 
-    <div>
+    <div class="flex items-center gap-5">
+      <div class="relative">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="absolute left-2.5 top-1.5 h-5 w-5 text-slate-400"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+          />
+        </svg>
+
+        <input
+          @input="onChangeSearchInput"
+          type="text"
+          class="rounded-md border border-slate-200 px-4 py-1 pl-9 pr-4 text-sm text-slate-400 outline-none focus:border-slate-400"
+          placeholder="Поиск..."
+        />
+      </div>
       <router-link :to="{ name: 'users.create' }">
         <button
           class="rounded-lg bg-green-500 p-1 text-white hover:bg-green-600"
@@ -127,7 +150,14 @@
       </tbody>
       <tbody v-else>
         <tr>
-          <td colspan="4" class="bg-white p-1 text-center">Loading...</td>
+          <td
+            v-if="users.length > 0"
+            colspan="4"
+            class="bg-white p-1 text-center"
+          >
+            Loading...
+          </td>
+          <td v-else colspan="4" class="bg-white p-1 text-center">No users</td>
         </tr>
       </tbody>
     </table>
@@ -216,7 +246,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import api from '@/axios/api'
 import { useAuthStore } from '@/stores/auth'
 import { useRoute, useRouter } from 'vue-router'
@@ -226,7 +256,9 @@ const router = useRouter()
 const authStore = useAuthStore()
 const users = ref([])
 const currentPage = ref(1)
-const totalPages = ref(0)
+const totalPages = ref(1)
+const searchQuery = ref('')
+const params = {}
 
 onMounted(async () => {
   if (route.query.return_page) {
@@ -256,7 +288,15 @@ function getPageRange() {
 
 async function loadData() {
   try {
-    const response = await api.get(`/users/all?page=${currentPage.value}`)
+    if (searchQuery.value !== 'undefined') {
+      params.search = searchQuery.value
+    }
+    const response = await api.get('/users/all', {
+      params: {
+        ...params,
+        page: currentPage.value
+      }
+    })
     users.value = response.data.data
     totalPages.value = response.data.last_page
   } catch (error) {
@@ -280,5 +320,11 @@ async function deleteUser(userId) {
       }
     }
   }
+}
+
+watch(searchQuery, loadData)
+const onChangeSearchInput = (event) => {
+  searchQuery.value = event.target.value
+  currentPage.value = 1
 }
 </script>
