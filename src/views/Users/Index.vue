@@ -163,7 +163,7 @@
     </table>
   </div>
 
-  <div v-if="users.length > 0" class="mt-5 flex justify-center">
+  <div v-if="totalPages > 1" class="mt-5 flex justify-center">
     <button
       @click="loadPage(currentPage - 1)"
       :disabled="currentPage === 1"
