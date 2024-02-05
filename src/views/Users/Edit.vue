@@ -3,8 +3,19 @@
   <div class="flex items-center justify-between">
     <div class="flex items-center">
       <router-link :to="{ name: 'users.index' }">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mr-3 h-5 w-5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="mr-3 h-5 w-5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
+          />
         </svg>
       </router-link>
       <span class="text-2xl">Edit user</span>
@@ -17,10 +28,43 @@
   <div class="mt-5 flex justify-center">
     <div class="w-6/12 rounded-2xl border bg-white p-5">
       <div class="flex flex-col gap-5">
-        <div v-if="error" class="my-5 rounded-r-lg border-l-4 border-yellow-500 bg-amber-100 p-5 text-yellow-700">{{ error }}</div>
-        <input type="text" v-model="user.name" class="border-1 rounded-lg border p-2 focus:outline-none" placeholder="Name" />
-        <input type="text" v-model="user.email" class="border-1 rounded-lg border p-2 focus:outline-none" placeholder="Email" />
-        <button @click="updateUser" class="mt-5 w-full rounded-lg bg-green-500 p-2 text-white hover:bg-green-600">Update user</button>
+        <div
+          v-if="error"
+          class="my-5 rounded-r-lg border-l-4 border-yellow-500 bg-amber-100 p-5 text-yellow-700"
+        >
+          {{ error }}
+        </div>
+        <input
+          type="text"
+          v-model="user.name"
+          :class="{
+            'border-red-500': [
+              'The name field is required',
+              'The name field must be between 2 and 100 characters'
+            ].includes(error)
+          }"
+          class="border-1 rounded-lg border p-2 focus:outline-none"
+          placeholder="Name"
+        />
+        <input
+          type="text"
+          v-model="user.email"
+          :class="{
+            'border-red-500': [
+              'The email field is required',
+              'The email has already been taken',
+              'The email field must be a valid email address'
+            ].includes(error)
+          }"
+          class="border-1 rounded-lg border p-2 focus:outline-none"
+          placeholder="Email"
+        />
+        <button
+          @click="updateUser"
+          class="mt-5 w-full rounded-lg bg-green-500 p-2 text-white hover:bg-green-600"
+        >
+          Update user
+        </button>
       </div>
     </div>
   </div>
@@ -66,7 +110,10 @@ async function updateUser() {
         localStorage.setItem('user_name', user.value.name)
         authStore.userInfo.user_name = user.value.name
       }
-      router.push({ name: 'users.index' })
+      router.push({
+        name: 'users.index',
+        query: { return_page: route.query.return_page }
+      })
     } catch (err) {
       switch (err.response.data.error.message) {
         case 'Too Many Requests':

@@ -2,8 +2,19 @@
 <template>
   <div class="flex items-center">
     <router-link :to="{ name: 'users.index' }">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mr-3 h-5 w-5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="mr-3 h-5 w-5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
+        />
       </svg>
     </router-link>
     <span class="text-2xl">Create user</span>
@@ -11,15 +22,71 @@
   <div class="mt-5 flex justify-center">
     <div class="w-6/12 rounded-2xl border bg-white p-5">
       <div class="flex flex-col gap-5">
-        <div v-if="error" class="my-5 rounded-r-lg border-l-4 border-yellow-500 bg-amber-100 p-5 text-yellow-700">{{ error }}</div>
-        <input v-model="name" type="text" class="border-1 rounded-lg border p-2 focus:outline-none" placeholder="Name" />
-        <input v-model="email" type="text" class="border-1 rounded-lg border p-2 focus:outline-none" placeholder="Email" />
-        <input v-model="password" type="password" class="border-1 rounded-lg border p-2 focus:outline-none" placeholder="Password" />
-        <input v-model="password_confirmation" type="password" class="border-1 rounded-lg border p-2 focus:outline-none" placeholder="Password confirmation" />
+        <div
+          v-if="error"
+          class="my-5 rounded-r-lg border-l-4 border-yellow-500 bg-amber-100 p-5 text-yellow-700"
+        >
+          {{ error }}
+        </div>
+        <input
+          v-model="name"
+          :class="{
+            'border-red-500': [
+              'The name field is required',
+              'The name field must be between 2 and 100 characters'
+            ].includes(error)
+          }"
+          type="text"
+          class="border-1 rounded-lg border p-2 focus:outline-none"
+          placeholder="Name"
+        />
+        <input
+          v-model="email"
+          :class="{
+            'border-red-500': [
+              'The email field is required',
+              'The email has already been taken',
+              'The email field must be a valid email address'
+            ].includes(error)
+          }"
+          type="text"
+          class="border-1 rounded-lg border p-2 focus:outline-none"
+          placeholder="Email"
+        />
+        <input
+          v-model="password"
+          :class="{
+            'border-red-500': [
+              'The password field is required',
+              'The password field must be at least 6 characters',
+              'The password field confirmation does not match'
+            ].includes(error)
+          }"
+          type="password"
+          class="border-1 rounded-lg border p-2 focus:outline-none"
+          placeholder="Password"
+        />
+        <input
+          v-model="password_confirmation"
+          :class="{
+            'border-red-500': [
+              'The password field confirmation does not match'
+            ].includes(error)
+          }"
+          type="password"
+          class="border-1 rounded-lg border p-2 focus:outline-none"
+          placeholder="Password confirmation"
+        />
         <div v-if="loader" class="mt-5 flex justify-center">
           <AppLoader />
         </div>
-        <button v-else @click="createUser" class="mt-5 w-full rounded-lg bg-green-500 p-2 text-white hover:bg-green-600">Create user</button>
+        <button
+          v-else
+          @click="createUser"
+          class="mt-5 w-full rounded-lg bg-green-500 p-2 text-white hover:bg-green-600"
+        >
+          Create user
+        </button>
       </div>
     </div>
   </div>

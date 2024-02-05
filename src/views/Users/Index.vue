@@ -43,7 +43,10 @@
                   />
                 </svg>
               </router-link>
-              <router-link :to="{ name: 'users.edit', params: { id: user.id } }" class="text-green-500 hover:text-green-700">
+              <router-link
+                :to="{ name: 'users.edit', params: { id: user.id }, query: { return_page: currentPage } }"
+                class="text-green-500 hover:text-green-700"
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
                   <path
                     stroke-linecap="round"
@@ -72,24 +75,97 @@
       </tbody>
     </table>
   </div>
+
+  <div v-if="users.length > 0" class="mt-5 flex justify-center">
+    <button
+      @click="loadPage(currentPage - 1)"
+      :disabled="currentPage === 1"
+      :class="{ 'mx-1 rounded bg-blue-300 px-2 py-1 text-white': currentPage === 1, 'mx-1 rounded bg-blue-500 px-2 py-1 text-white': currentPage !== 1 }"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+      </svg>
+    </button>
+
+    <div class="flex" v-if="totalPages <= 10">
+      <div v-for="page in totalPages" :key="page">
+        <button
+          @click="loadPage(page)"
+          :disabled="currentPage === page"
+          :class="{ 'rounded bg-blue-500 text-white': currentPage === page, 'mx-1 px-2 py-1': true }"
+        >
+          {{ page }}
+        </button>
+      </div>
+    </div>
+    <div class="flex" v-else>
+      <div v-for="page in getPageRange()" :key="page">
+        <button
+          @click="loadPage(page)"
+          :disabled="currentPage === page"
+          :class="{ 'rounded bg-blue-500 text-white': currentPage === page, 'mx-1 px-2 py-1': true }"
+        >
+          {{ page }}
+        </button>
+      </div>
+    </div>
+
+    <button
+      @click="loadPage(currentPage + 1)"
+      :disabled="currentPage === totalPages"
+      :class="{
+        'mx-1 rounded bg-blue-300 px-2 py-1 text-white': currentPage === totalPages,
+        'mx-1 rounded bg-blue-500 px-2 py-1 text-white': currentPage !== totalPages
+      }"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+      </svg>
+    </button>
+  </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from 'vue'
 import api from '@/axios/api'
 import { useAuthStore } from '@/stores/auth'
+import { useRoute, useRouter } from 'vue-router'
 
+const route = useRoute()
+const router = useRouter()
 const authStore = useAuthStore()
-const users = ref('')
+const users = ref([])
+const currentPage = ref(1)
+const totalPages = ref(0)
 
 onMounted(async () => {
+  if (route.query.return_page) {
+    currentPage.value = parseInt(route.query.return_page)
+    router.replace({ name: 'users.index' })
+  }
+
   await loadData()
 })
 
+async function loadPage(page) {
+  if (page >= 1 && page <= totalPages.value) {
+    currentPage.value = page
+    await loadData()
+  }
+}
+
+function getPageRange() {
+  const rangeStart = Math.max(currentPage.value - 3, 1)
+  const rangeEnd = Math.min(currentPage.value + 3, totalPages.value)
+
+  return Array.from({ length: rangeEnd - rangeStart + 1 }, (_, i) => i + rangeStart)
+}
+
 async function loadData() {
   try {
-    const response = await api.get(`/users/all`)
-    users.value = response.data
+    const response = await api.get(`/users/all?page=${currentPage.value}`)
+    users.value = response.data.data
+    totalPages.value = response.data.last_page
   } catch (error) {
     console.log('Failed to load data')
   }
