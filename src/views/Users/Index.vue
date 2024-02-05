@@ -86,7 +86,7 @@
             <div class="flex gap-3">
               <router-link
                 :to="{ name: 'users.show', params: { id: user.id } }"
-                class="text-blue-500 hover:text-blue-700"
+                class="text-blue-500 opacity-60 hover:text-blue-700"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -109,7 +109,7 @@
                   params: { id: user.id },
                   query: { return_page: currentPage }
                 }"
-                class="text-green-500 hover:text-green-700"
+                class="text-green-500 opacity-60 hover:text-green-700"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -129,7 +129,7 @@
               <button
                 v-if="user.id !== authStore.userInfo.user_id"
                 @click="deleteUser(user.id)"
-                class="text-red-500 hover:text-red-700"
+                class="text-red-500 opacity-60 hover:text-red-700"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
