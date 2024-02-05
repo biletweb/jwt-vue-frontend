@@ -2,7 +2,12 @@
 <template>
   <div class="flex items-center justify-between">
     <div class="flex items-center">
-      <router-link :to="{ name: 'users.index' }">
+      <router-link
+        :to="{
+          name: 'users.index',
+          query: { return_page: route.query.return_page }
+        }"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -29,9 +34,9 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import api from '@/axios/api'
-import { useRoute } from 'vue-router'
-import router from '@/router'
+import { useRoute, useRouter } from 'vue-router'
 
+const router = useRouter()
 const route = useRoute()
 const user = ref('')
 
@@ -41,7 +46,9 @@ onMounted(async () => {
     user.value = response.data
   } catch (error) {
     if (error.response.data.error.message === 'User not found') {
-      router.push({ name: 'users.index' })
+      router.push({
+        name: 'users.index'
+      })
     }
     console.log('Failed to load data')
   }

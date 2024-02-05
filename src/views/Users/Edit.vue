@@ -112,8 +112,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import api from '@/axios/api'
-import { useRoute } from 'vue-router'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 
 const route = useRoute()

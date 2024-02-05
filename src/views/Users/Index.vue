@@ -85,7 +85,11 @@
           <td class="px-6 py-4">
             <div class="flex gap-3">
               <router-link
-                :to="{ name: 'users.show', params: { id: user.id } }"
+                :to="{
+                  name: 'users.show',
+                  params: { id: user.id },
+                  query: { return_page: currentPage }
+                }"
                 class="text-blue-500 opacity-60 hover:text-blue-700"
               >
                 <svg
