@@ -1,7 +1,10 @@
 <template>
   <div class="mx-auto flex min-h-screen flex-col bg-slate-50 p-5 sm:container">
     <div>
-      <AppNavbar :token="authData.access_token" :user_name="authData.user_name" />
+      <AppNavbar
+        :token="authData.access_token"
+        :user_name="authData.user_name"
+      />
     </div>
     <div class="my-5 flex-grow">
       <router-view />
@@ -43,6 +46,10 @@ updateAuthStore()
 
 // Если данные (указываем какие) в authStore.userInfo изменятся, то они автоматически обновятся во всех компонентах
 const authData = computed(() => {
-  return { access_token: authStore.userInfo.access_token, user_id: authStore.userInfo.user_id, user_name: authStore.userInfo.user_name }
+  return {
+    access_token: authStore.userInfo.access_token,
+    user_id: authStore.userInfo.user_id,
+    user_name: authStore.userInfo.user_name
+  }
 })
 </script>

@@ -2,7 +2,14 @@
   <div class="flex justify-between border-b">
     <div class="mb-5 flex gap-5">
       <div class="flex items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mr-1 h-5 w-5">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="mr-1 h-5 w-5"
+        >
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -13,7 +20,14 @@
       </div>
 
       <div v-if="token" class="flex items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mr-1 h-5 w-5">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="mr-1 h-5 w-5"
+        >
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -32,7 +46,14 @@
           {{ user_name }}
         </div>
         <router-link @click="logout" to="/">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-1 h-5 w-5">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="ml-1 h-5 w-5"
+          >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"

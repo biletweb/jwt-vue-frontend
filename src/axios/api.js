@@ -24,17 +24,24 @@ instance.interceptors.response.use(
   (response) => response,
   async (error) => {
     try {
-      if (error.response.data.message === 'Unauthenticated.' && error.response.status === 401) {
+      if (
+        error.response.data.message === 'Unauthenticated.' &&
+        error.response.status === 401
+      ) {
         const jwtToken = localStorage.getItem('access_token')
         if (jwtToken) {
           const response = await instance.post('/auth/refresh')
           localStorage.setItem('access_token', response.data.access_token)
-          error.config.headers['Authorization'] = `Bearer ${response.data.access_token}`
+          error.config.headers['Authorization'] =
+            `Bearer ${response.data.access_token}`
           console.log('Success refresh token')
           return await instance(error.config)
         }
       }
-      if (error.response.status === 401 && localStorage.getItem('access_token')) {
+      if (
+        error.response.status === 401 &&
+        localStorage.getItem('access_token')
+      ) {
         const authStore = useAuthStore()
         authStore.logout()
         console.log('Token expired')

@@ -3,8 +3,19 @@
   <div class="flex items-center justify-between">
     <div class="flex items-center">
       <router-link :to="{ name: 'home' }">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mr-3 h-5 w-5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="mr-3 h-5 w-5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
+          />
         </svg>
       </router-link>
       <span class="text-2xl">Users</span>
@@ -12,7 +23,11 @@
 
     <div>
       <router-link :to="{ name: 'users.create' }">
-        <button class="rounded-lg bg-green-500 p-1 text-white hover:bg-green-600"><span class="mx-2">Create user</span></button>
+        <button
+          class="rounded-lg bg-green-500 p-1 text-white hover:bg-green-600"
+        >
+          <span class="mx-2">Create user</span>
+        </button>
       </router-link>
     </div>
   </div>
@@ -28,14 +43,34 @@
         </tr>
       </thead>
       <tbody v-if="users.length > 0">
-        <tr v-for="(user, index) in users" :key="user.id" :class="{ 'border-b': index !== users.length - 1 }" class="bg-white">
-          <th scope="row" class="whitespace-nowrap px-6 py-4 font-medium text-gray-900">{{ user.id }}</th>
+        <tr
+          v-for="(user, index) in users"
+          :key="user.id"
+          :class="{ 'border-b': index !== users.length - 1 }"
+          class="bg-white"
+        >
+          <th
+            scope="row"
+            class="whitespace-nowrap px-6 py-4 font-medium text-gray-900"
+          >
+            {{ user.id }}
+          </th>
           <td class="px-6 py-4">{{ user.name }}</td>
           <td class="px-6 py-4">{{ user.email }}</td>
           <td class="px-6 py-4">
             <div class="flex gap-3">
-              <router-link :to="{ name: 'users.show', params: { id: user.id } }" class="text-blue-500 hover:text-blue-700">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+              <router-link
+                :to="{ name: 'users.show', params: { id: user.id } }"
+                class="text-blue-500 hover:text-blue-700"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="h-6 w-6"
+                >
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -44,10 +79,21 @@
                 </svg>
               </router-link>
               <router-link
-                :to="{ name: 'users.edit', params: { id: user.id }, query: { return_page: currentPage } }"
+                :to="{
+                  name: 'users.edit',
+                  params: { id: user.id },
+                  query: { return_page: currentPage }
+                }"
                 class="text-green-500 hover:text-green-700"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="h-6 w-6"
+                >
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -55,8 +101,19 @@
                   />
                 </svg>
               </router-link>
-              <button v-if="user.id !== authStore.userInfo.user_id" @click="deleteUser(user.id)" class="text-red-500 hover:text-red-700">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+              <button
+                v-if="user.id !== authStore.userInfo.user_id"
+                @click="deleteUser(user.id)"
+                class="text-red-500 hover:text-red-700"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="h-6 w-6"
+                >
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -80,10 +137,24 @@
     <button
       @click="loadPage(currentPage - 1)"
       :disabled="currentPage === 1"
-      :class="{ 'mx-1 rounded bg-blue-300 px-2 py-1 text-white': currentPage === 1, 'mx-1 rounded bg-blue-500 px-2 py-1 text-white': currentPage !== 1 }"
+      :class="{
+        'mx-1 rounded bg-blue-300 px-2 py-1 text-white': currentPage === 1,
+        'mx-1 rounded bg-blue-500 px-2 py-1 text-white': currentPage !== 1
+      }"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="h-5 w-5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M15.75 19.5 8.25 12l7.5-7.5"
+        />
       </svg>
     </button>
 
@@ -92,7 +163,10 @@
         <button
           @click="loadPage(page)"
           :disabled="currentPage === page"
-          :class="{ 'rounded bg-blue-500 text-white': currentPage === page, 'mx-1 px-2 py-1': true }"
+          :class="{
+            'rounded bg-blue-500 text-white': currentPage === page,
+            'mx-1 px-2 py-1': true
+          }"
         >
           {{ page }}
         </button>
@@ -103,7 +177,10 @@
         <button
           @click="loadPage(page)"
           :disabled="currentPage === page"
-          :class="{ 'rounded bg-blue-500 text-white': currentPage === page, 'mx-1 px-2 py-1': true }"
+          :class="{
+            'rounded bg-blue-500 text-white': currentPage === page,
+            'mx-1 px-2 py-1': true
+          }"
         >
           {{ page }}
         </button>
@@ -114,12 +191,25 @@
       @click="loadPage(currentPage + 1)"
       :disabled="currentPage === totalPages"
       :class="{
-        'mx-1 rounded bg-blue-300 px-2 py-1 text-white': currentPage === totalPages,
-        'mx-1 rounded bg-blue-500 px-2 py-1 text-white': currentPage !== totalPages
+        'mx-1 rounded bg-blue-300 px-2 py-1 text-white':
+          currentPage === totalPages,
+        'mx-1 rounded bg-blue-500 px-2 py-1 text-white':
+          currentPage !== totalPages
       }"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="h-5 w-5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m8.25 4.5 7.5 7.5-7.5 7.5"
+        />
       </svg>
     </button>
   </div>
@@ -158,7 +248,10 @@ function getPageRange() {
   const rangeStart = Math.max(currentPage.value - 3, 1)
   const rangeEnd = Math.min(currentPage.value + 3, totalPages.value)
 
-  return Array.from({ length: rangeEnd - rangeStart + 1 }, (_, i) => i + rangeStart)
+  return Array.from(
+    { length: rangeEnd - rangeStart + 1 },
+    (_, i) => i + rangeStart
+  )
 }
 
 async function loadData() {

@@ -68,13 +68,25 @@ router.beforeEach((to, from, next) => {
     next({ name: 'home' })
   } else if (to.name === 'signup' && localStorage.getItem('access_token')) {
     next({ name: 'home' })
-  } else if (to.name === 'users.index' && !localStorage.getItem('access_token')) {
+  } else if (
+    to.name === 'users.index' &&
+    !localStorage.getItem('access_token')
+  ) {
     next({ name: 'signin' })
-  } else if (to.name === 'users.show' && !localStorage.getItem('access_token')) {
+  } else if (
+    to.name === 'users.show' &&
+    !localStorage.getItem('access_token')
+  ) {
     next({ name: 'signin' })
-  } else if (to.name === 'users.edit' && !localStorage.getItem('access_token')) {
+  } else if (
+    to.name === 'users.edit' &&
+    !localStorage.getItem('access_token')
+  ) {
     next({ name: 'signin' })
-  } else if (to.name === 'users.create' && !localStorage.getItem('access_token')) {
+  } else if (
+    to.name === 'users.create' &&
+    !localStorage.getItem('access_token')
+  ) {
     next({ name: 'signin' })
   } else {
     authStore.error = null

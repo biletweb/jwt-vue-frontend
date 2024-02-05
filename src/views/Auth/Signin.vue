@@ -63,6 +63,9 @@ const email = ref('')
 const password = ref('')
 
 async function signIn() {
-  await authStore.auth({ email: email.value, password: password.value }, 'signin')
+  await authStore.auth(
+    { email: email.value, password: password.value },
+    'signin'
+  )
 }
 </script>
