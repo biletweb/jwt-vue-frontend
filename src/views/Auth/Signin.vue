@@ -3,7 +3,7 @@
   <div class="flex justify-center">
     <div class="w-4/12 rounded-2xl border bg-white p-5">
       <div class="flex flex-col gap-5">
-        <h1 class="mb-4 text-2xl font-bold">Sign in</h1>
+        <h1 class="mb-4 text-2xl font-bold text-green-500">Sign in</h1>
         <div
           v-if="authStore.error"
           class="mb-5 rounded-r-lg border-l-4 border-yellow-500 bg-amber-100 p-5 text-yellow-700"
