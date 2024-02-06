@@ -3,10 +3,11 @@ import { useAuthStore } from '@/stores/auth'
 import Home from '@/views/Home.vue'
 import Signin from '@/views/Auth/Signin.vue'
 import Signup from '@/views/Auth/Signup.vue'
-import Index from '@/views/Users/Index.vue'
+import UsersIndex from '@/views/Users/Index.vue'
 import Show from '@/views/Users/Show.vue'
 import Edit from '@/views/Users/Edit.vue'
 import Create from '@/views/Users/Create.vue'
+import ProfileIndex from '@/views/Users/Profile/index.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,7 +39,7 @@ const router = createRouter({
       path: '/users/index',
       name: 'users.index',
       meta: { title: 'Users' },
-      component: Index
+      component: UsersIndex
     },
     {
       path: '/users/show/:id',
@@ -57,6 +58,12 @@ const router = createRouter({
       name: 'users.create',
       meta: { title: 'Create user' },
       component: Create
+    },
+    {
+      path: '/users/profile',
+      name: 'users.profile',
+      meta: { title: 'User profile' },
+      component: ProfileIndex
     }
   ]
 })
@@ -85,6 +92,11 @@ router.beforeEach((to, from, next) => {
     next({ name: 'signin' })
   } else if (
     to.name === 'users.create' &&
+    !localStorage.getItem('access_token')
+  ) {
+    next({ name: 'signin' })
+  } else if (
+    to.name === 'users.profile' &&
     !localStorage.getItem('access_token')
   ) {
     next({ name: 'signin' })

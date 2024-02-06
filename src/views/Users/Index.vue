@@ -1,23 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="flex items-center justify-between">
-    <div class="flex items-center">
-      <router-link :to="{ name: 'home' }">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="mr-3 h-5 w-5"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
-          />
-        </svg>
-      </router-link>
+    <div>
       <span class="text-2xl">Users</span>
     </div>
 
@@ -135,7 +119,7 @@
                 </svg>
               </router-link>
               <button
-                v-if="user.id !== authStore.userInfo.user_id"
+                v-if="user.id !== userMe.id"
                 @click="deleteUser(user.id)"
                 class="text-red-500 opacity-60 hover:text-red-700"
               >
@@ -262,19 +246,25 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue'
 import api from '@/axios/api'
-import { useAuthStore } from '@/stores/auth'
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
 const router = useRouter()
-const authStore = useAuthStore()
 const users = ref([])
 const currentPage = ref(1)
 const totalPages = ref(1)
 const searchQuery = ref('')
 const params = {}
+const userMe = ref('')
 
 onMounted(async () => {
+  try {
+    const response = await api.post(`/auth/me`)
+    userMe.value = response.data
+  } catch (error) {
+    console.log('Failed to load data userMe')
+  }
+
   if (route.query.return_page) {
     currentPage.value = parseInt(route.query.return_page)
     router.replace({ name: 'users.index' })

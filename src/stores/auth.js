@@ -8,10 +8,7 @@ export const useAuthStore = defineStore('auth', () => {
   const userInfo = ref({
     access_token: '',
     expires_in: '',
-    token_type: '',
-    user_id: '',
-    user_name: '',
-    user_email: ''
+    token_type: ''
   })
   const error = ref('')
   const loader = ref(false)
@@ -40,15 +37,6 @@ export const useAuthStore = defineStore('auth', () => {
           token_type: response.data.token_type
         }
         localStorage.setItem('access_token', userInfo.value.access_token)
-        const getUser = await api.post('/auth/me')
-        userInfo.value = {
-          ...userInfo.value,
-          user_id: getUser.data.id,
-          user_name: getUser.data.name,
-          user_email: getUser.data.email
-        }
-        localStorage.setItem('user_name', userInfo.value.user_name)
-        localStorage.setItem('user_id', userInfo.value.user_id)
         router.push({ name: 'home' })
       }
     } catch (err) {

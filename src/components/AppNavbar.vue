@@ -50,17 +50,22 @@
         class="text-green-500 hover:text-green-700"
         >Sign in</router-link
       >
+
       <router-link
         v-if="!token"
         to="/auth/signup"
         class="text-green-500 hover:text-green-700"
-        >Sign up</router-link
-      >
+        >Sign up
+      </router-link>
+
       <div v-if="token" class="flex items-center">
-        <AppLoader v-if="!user_name" class="h-5 w-5" />
-        <div class="text-green-500">
-          {{ user_name }}
-        </div>
+        <router-link
+          to="/users/profile"
+          class="text-green-500 hover:text-green-700"
+        >
+          Profile
+        </router-link>
+
         <router-link @click="logout" to="/">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +73,7 @@
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="ml-1 h-5 w-5 text-green-500 hover:text-green-700"
+            class="ml-1 h-5 w-5 text-red-500 hover:text-red-700"
           >
             <path
               stroke-linecap="round"
@@ -84,13 +89,11 @@
 
 <script setup>
 import { useAuthStore } from '@/stores/auth'
-import AppLoader from '@/components/AppLoader.vue'
 
 const authStore = useAuthStore()
 
 defineProps({
-  token: String,
-  user_name: String
+  token: String
 })
 
 const logout = () => {

@@ -2,7 +2,12 @@
 <template>
   <div class="flex items-center justify-between">
     <div class="flex items-center">
-      <router-link :to="{ name: 'users.index' }">
+      <router-link
+        :to="{
+          name: 'users.index',
+          query: { return_page: route.query.return_page }
+        }"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
