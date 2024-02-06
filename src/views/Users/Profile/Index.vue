@@ -19,7 +19,7 @@
           :src="
             !userMe.avatar
               ? '/img/user/avatar/no_avatar.png'
-              : 'http://127.0.0.1:8000/storage/' + userMe.avatar
+              : $imageUrl + userMe.avatar
           "
           alt=""
         />
