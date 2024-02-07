@@ -12,7 +12,7 @@ npm install
 baseURL: 'http://127.0.0.1:8000/api' in src/axios/api.js
 ```
 
-### Set up a URL to work with images from the backend
+### Setup a URL to work with images from the backend
 
 ```sh
 app.config.globalProperties.$imageUrl = 'http://127.0.0.1:8000/storage/' in src/main.js
