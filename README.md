@@ -6,19 +6,19 @@
 npm install
 ```
 
-### Configure the baseURL to work with the backend
+### Setup a baseURL to work with the backend
 
 ```sh
 baseURL: 'http://127.0.0.1:8000/api' in src/axios/api.js
 ```
 
-### Setup a URL to work with images from the backend
+### Setup a imageUrl to work with images from the backend
 
 ```sh
 app.config.globalProperties.$imageUrl = 'http://127.0.0.1:8000/storage/' in src/main.js
 ```
 
-### Compile and Hot-Reload for Development
+### Start a local development server
 
 ```sh
 npm run dev
