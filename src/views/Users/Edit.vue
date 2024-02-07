@@ -128,6 +128,11 @@ async function loadData() {
     const response = await api.get(`/users/edit/${route.params.id}`)
     user.value = response.data
   } catch (error) {
+    if (error.response.data.error.message === 'User not found') {
+      router.push({
+        name: 'users.index'
+      })
+    }
     console.log('Failed to load data')
   }
 }
