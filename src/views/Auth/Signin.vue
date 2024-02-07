@@ -78,10 +78,11 @@
         <div class="flex items-center">
           <input
             v-model="remember_me"
+            id="remember"
             type="checkbox"
             class="h-4 w-4 focus:outline-none"
           />
-          <label class="ms-2 text-sm font-medium text-slate-400"
+          <label for="remember" class="ms-2 text-sm font-medium text-slate-400"
             >Remember me</label
           >
         </div>
