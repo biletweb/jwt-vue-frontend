@@ -26,7 +26,8 @@ instance.interceptors.response.use(
     try {
       if (
         error.response.data.message === 'Unauthenticated.' &&
-        error.response.status === 401
+        error.response.status === 401 &&
+        localStorage.getItem('remember_me') === 'true'
       ) {
         const jwtToken = localStorage.getItem('access_token')
         if (jwtToken) {

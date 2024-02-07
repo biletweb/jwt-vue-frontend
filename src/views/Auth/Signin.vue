@@ -75,6 +75,16 @@
             />
           </div>
         </div>
+        <div class="flex items-center">
+          <input
+            v-model="remember_me"
+            type="checkbox"
+            class="h-4 w-4 focus:outline-none"
+          />
+          <label class="ms-2 text-sm font-medium text-slate-400"
+            >Remember me</label
+          >
+        </div>
         <div v-if="authStore.loader" class="mt-5 flex justify-center">
           <AppLoader />
         </div>
@@ -99,10 +109,15 @@ const authStore = useAuthStore()
 
 const email = ref('')
 const password = ref('')
+const remember_me = ref(false)
 
 async function signIn() {
   await authStore.auth(
-    { email: email.value, password: password.value },
+    {
+      email: email.value,
+      password: password.value,
+      remember_me: remember_me.value
+    },
     'signin'
   )
 }

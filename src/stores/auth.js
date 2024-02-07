@@ -37,6 +37,9 @@ export const useAuthStore = defineStore('auth', () => {
           token_type: response.data.token_type
         }
         localStorage.setItem('access_token', userInfo.value.access_token)
+        if (payload.remember_me) {
+          localStorage.setItem('remember_me', true)
+        }
         router.push({ name: 'home' })
       }
     } catch (err) {
