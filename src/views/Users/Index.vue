@@ -332,7 +332,7 @@ async function deleteUser(userId) {
 
   if (confirmed) {
     try {
-      const response = await api.delete(`/users/delete/${userId}`)
+      const response = await api.post(`/users/delete/${userId}`)
       alert(response.data.message)
       await loadData()
     } catch (error) {
