@@ -24,7 +24,7 @@
 
         <select
           @change="onChangeSelect"
-          class="h-8 rounded-md border border-slate-200 bg-white px-4 pl-9 text-sm text-slate-400 outline-none"
+          class="h-8 appearance-none rounded-md border border-slate-200 bg-white px-4 pl-9 text-sm text-slate-400 outline-none"
         >
           <option value="asc">Ascending</option>
           <option value="desc">Descending</option>
