@@ -6,6 +6,30 @@
     </div>
 
     <div class="flex items-center gap-5">
+      <div class="relative">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="absolute left-2.5 top-1.5 h-5 w-5 text-slate-400"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"
+          />
+        </svg>
+
+        <select
+          @change="onChangeSelect"
+          class="h-8 rounded-md border border-slate-200 bg-white px-4 pl-9 text-sm text-slate-400 outline-none"
+        >
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+      </div>
       <div class="flex items-center">
         <div class="relative">
           <svg
@@ -26,7 +50,7 @@
           <input
             @input="onChangeSearchInput"
             type="text"
-            class="rounded-md border border-slate-200 px-4 py-1 pl-9 pr-4 text-sm text-slate-400 outline-none focus:border-slate-400"
+            class="h-8 rounded-md border border-slate-200 px-4 pl-9 pr-4 text-sm text-slate-400 outline-none focus:border-slate-400"
             placeholder="Search..."
           />
         </div>
@@ -144,14 +168,7 @@
       </tbody>
       <tbody v-else>
         <tr>
-          <td
-            v-if="users.length > 0"
-            colspan="6"
-            class="bg-white p-1 text-center uppercase"
-          >
-            Loading...
-          </td>
-          <td v-else colspan="6" class="bg-white p-1 text-center uppercase">
+          <td colspan="6" class="bg-white p-1 text-center uppercase">
             No users
           </td>
         </tr>
@@ -244,7 +261,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, reactive, ref, watch } from 'vue'
 import api from '@/axios/api'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -253,7 +270,10 @@ const router = useRouter()
 const users = ref([])
 const currentPage = ref(1)
 const totalPages = ref(1)
-const searchQuery = ref('')
+const filterQuery = reactive({
+  searchQuery: '',
+  sortQuery: 'asc'
+})
 const params = {}
 const userMe = ref('')
 
@@ -292,9 +312,8 @@ function getPageRange() {
 
 async function loadData() {
   try {
-    if (searchQuery.value !== undefined) {
-      params.search = searchQuery.value
-    }
+    params.search = filterQuery.searchQuery
+    params.sort = filterQuery.sortQuery
     const response = await api.get('/users/all', {
       params: {
         ...params,
@@ -326,9 +345,13 @@ async function deleteUser(userId) {
   }
 }
 
-watch(searchQuery, loadData)
+watch(filterQuery, loadData)
 const onChangeSearchInput = (event) => {
-  searchQuery.value = event.target.value
+  filterQuery.searchQuery = event.target.value
   currentPage.value = 1
+}
+
+const onChangeSelect = (event) => {
+  filterQuery.sortQuery = event.target.value
 }
 </script>
