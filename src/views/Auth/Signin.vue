@@ -80,9 +80,11 @@
             v-model="remember_me"
             id="remember"
             type="checkbox"
-            class="h-4 w-4 focus:outline-none"
+            class="relative h-5 w-5 cursor-pointer appearance-none rounded-md border bg-white after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:content-['\2713'] checked:border-0 checked:bg-green-500"
           />
-          <label for="remember" class="ms-2 text-sm font-medium text-slate-400"
+          <label
+            for="remember"
+            class="ms-2 cursor-pointer text-sm font-medium text-slate-400"
             >Remember me</label
           >
         </div>
