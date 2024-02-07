@@ -6,16 +6,22 @@
 npm install
 ```
 
+### Configure the baseURL to work with the backend
+
+```sh
+baseURL: 'http://127.0.0.1:8000/api' in src/axios/api.js
+```
+
+### Set up a URL to work with images from the backend
+
+```sh
+app.config.globalProperties.$imageUrl = 'http://127.0.0.1:8000/storage/' in src/main.js
+```
+
 ### Compile and Hot-Reload for Development
 
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-To work you need to install the frontend <a href="https://github.com/biletweb/jwt-laravel-backend">jwt-laravel-backend</a>.
+To work you need to install the frontend <a href="https://github.com/biletweb/jwt-laravel-backend">jwt-laravel-backend</a>
