@@ -88,7 +88,17 @@ async function loadImage(event) {
       })
       await loadData()
     } catch (err) {
-      alert(err.response.data.error.message)
+      switch (err.response.data.error.message) {
+        case 'The avatar field must be a file of type: jpeg, jpg, png.':
+          alert('The avatar must be a file of type: jpeg, jpg, png')
+          break
+        case 'The avatar field must not be greater than 1024 kilobytes.':
+          alert('The avatar must not be greater than 1 MB')
+          break
+        case 'The avatar failed to upload.':
+          alert('The avatar failed to upload')
+          break
+      }
     }
   } else {
     alert('No file selected')

@@ -1,33 +1,28 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="flex items-center justify-between">
-    <div class="flex items-center">
-      <router-link
-        :to="{
-          name: 'users.index',
-          query: { return_page: route.query.return_page }
-        }"
+  <div class="flex items-center">
+    <router-link
+      :to="{
+        name: 'users.index',
+        query: { return_page: route.query.return_page }
+      }"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="mr-3 h-5 w-5"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="mr-3 h-5 w-5"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
-          />
-        </svg>
-      </router-link>
-      <span class="text-2xl">Edit user</span>
-    </div>
-    <div>
-      <!-- <span class="text-2xl">{{ user.name }}, {{ user.email }}</span> -->
-    </div>
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
+        />
+      </svg>
+    </router-link>
+    <span class="text-2xl">Edit user</span>
   </div>
 
   <div class="mt-5 flex justify-center">
@@ -118,12 +113,10 @@
 import { onMounted, ref } from 'vue'
 import api from '@/axios/api'
 import { useRoute, useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
 
 const route = useRoute()
 const router = useRouter()
 const user = ref('')
-const authStore = useAuthStore()
 const error = ref('')
 
 onMounted(async () => {
@@ -149,10 +142,6 @@ async function updateUser() {
         email: user.value.email
       })
       alert('User updated successfully')
-      if (authStore.userInfo.user_id == route.params.id) {
-        localStorage.setItem('user_name', user.value.name)
-        authStore.userInfo.user_name = user.value.name
-      }
       router.push({
         name: 'users.index',
         query: { return_page: route.query.return_page }
