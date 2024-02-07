@@ -98,6 +98,9 @@ async function loadImage(event) {
         case 'The avatar failed to upload.':
           alert('The avatar failed to upload')
           break
+        case 'Too Many Requests':
+          alert('Too many requests')
+          break
       }
     }
   } else {
