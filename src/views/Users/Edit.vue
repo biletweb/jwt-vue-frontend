@@ -61,7 +61,7 @@
                   'The name field must be between 2 and 100 characters'
                 ].includes(error)
               }"
-              class="border-1 w-full rounded-lg border p-2 pl-10 text-slate-400 focus:outline-none"
+              class="w-full rounded-lg border p-2 pl-10 text-slate-400 focus:outline-none"
               placeholder="Name"
             />
           </div>
@@ -93,7 +93,7 @@
                   'The email field must be a valid email address'
                 ].includes(error)
               }"
-              class="border-1 w-full rounded-lg border p-2 pl-10 text-slate-400 focus:outline-none"
+              class="w-full rounded-lg border p-2 pl-10 text-slate-400 focus:outline-none"
               placeholder="Email"
             />
           </div>

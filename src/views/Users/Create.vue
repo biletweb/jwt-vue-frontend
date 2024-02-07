@@ -55,7 +55,7 @@
                 ].includes(error)
               }"
               type="text"
-              class="border-1 w-full rounded-lg border p-2 pl-10 text-slate-400 focus:outline-none"
+              class="w-full rounded-lg border p-2 pl-10 text-slate-400 focus:outline-none"
               placeholder="Name"
             />
           </div>
@@ -87,7 +87,7 @@
                 ].includes(error)
               }"
               type="text"
-              class="border-1 w-full rounded-lg border p-2 pl-10 text-slate-400 focus:outline-none"
+              class="w-full rounded-lg border p-2 pl-10 text-slate-400 focus:outline-none"
               placeholder="Email"
             />
           </div>
@@ -119,7 +119,7 @@
                 ].includes(error)
               }"
               type="password"
-              class="border-1 w-full rounded-lg border p-2 pl-10 text-slate-400 focus:outline-none"
+              class="w-full rounded-lg border p-2 pl-10 text-slate-400 focus:outline-none"
               placeholder="Password"
             />
           </div>
@@ -149,7 +149,7 @@
                 ].includes(error)
               }"
               type="password"
-              class="border-1 w-full rounded-lg border p-2 pl-10 text-slate-400 focus:outline-none"
+              class="w-full rounded-lg border p-2 pl-10 text-slate-400 focus:outline-none"
               placeholder="Password confirmation"
             />
           </div>
