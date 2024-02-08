@@ -8,6 +8,7 @@ import Show from '@/views/Users/Show.vue'
 import Edit from '@/views/Users/Edit.vue'
 import Create from '@/views/Users/Create.vue'
 import ProfileIndex from '@/views/Users/Profile/index.vue'
+import EmailConfirm from '@/views/Auth/EmailConfirm.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -64,6 +65,12 @@ const router = createRouter({
       name: 'users.profile',
       meta: { title: 'User profile' },
       component: ProfileIndex
+    },
+    {
+      path: '/auth/email/confirm/:token/:user',
+      name: 'email.confirm',
+      meta: { title: 'Email confirmation' },
+      component: EmailConfirm
     }
   ]
 })

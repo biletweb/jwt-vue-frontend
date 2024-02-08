@@ -29,6 +29,7 @@ export const useAuthStore = defineStore('auth', () => {
         ...payload
       })
       if (type === 'signup') {
+        alert('To complete registration you need to confirm your email')
         router.push({ name: 'signin' })
       } else {
         userInfo.value = {
@@ -73,6 +74,12 @@ export const useAuthStore = defineStore('auth', () => {
           break
         case 'Too Many Requests':
           error.value = 'Too many requests'
+          break
+        case 'You have not confirmed email':
+          error.value = 'You have not confirmed email'
+          break
+        case 'Failed to send confirmation email, try again later':
+          error.value = 'Failed to send confirmation email, try again later'
           break
         default:
           error.value = 'Something went wrong'
