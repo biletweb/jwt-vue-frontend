@@ -91,7 +91,20 @@
           >
             {{ user.id }}
           </th>
-          <td class="truncate px-6 py-4">{{ user.name }}</td>
+          <td class="relative truncate px-6 py-4">
+            <img
+              class="absolute left-6 top-2 h-10 w-10 rounded-full"
+              :src="
+                user.avatar
+                  ? $imageUrl + user.avatar
+                  : '/img/user/avatar/no_avatar.png'
+              "
+              :alt="user.name"
+            />
+            <div class="px-14">
+              {{ user.name }}
+            </div>
+          </td>
           <td class="truncate px-6 py-4">{{ user.email }}</td>
           <td class="truncate px-6 py-4">{{ user.created_at }}</td>
           <td class="truncate px-6 py-4">{{ user.updated_at }}</td>
