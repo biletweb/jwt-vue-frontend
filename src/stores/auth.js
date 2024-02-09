@@ -10,11 +10,13 @@ export const useAuthStore = defineStore('auth', () => {
     expires_in: '',
     token_type: ''
   })
+  const successResponse = ref('')
   const error = ref('')
   const loader = ref(false)
 
   const auth = async (payload, type) => {
     const authUrl = ref('')
+    successResponse.value = ''
     error.value = ''
     loader.value = true
 
@@ -29,8 +31,8 @@ export const useAuthStore = defineStore('auth', () => {
         ...payload
       })
       if (type === 'signup') {
-        alert('To complete registration you need to confirm your email')
-        router.push({ name: 'signin' })
+        successResponse.value =
+          'To complete registration you need to confirm your email'
       } else {
         userInfo.value = {
           access_token: response.data.access_token,
@@ -97,5 +99,5 @@ export const useAuthStore = defineStore('auth', () => {
     router.push({ name: 'home' })
   }
 
-  return { userInfo, auth, logout, error, loader }
+  return { userInfo, auth, logout, error, successResponse, loader }
 })

@@ -5,6 +5,12 @@
       <div class="flex flex-col gap-5">
         <h1 class="mb-4 text-2xl font-bold text-green-500">Sign up</h1>
         <div
+          v-if="authStore.successResponse"
+          class="mb-5 rounded-r-lg border-l-4 border-green-500 bg-green-100 p-5 text-green-700"
+        >
+          {{ authStore.successResponse }}
+        </div>
+        <div
           v-if="authStore.error"
           class="mb-5 rounded-r-lg border-l-4 border-yellow-500 bg-amber-100 p-5 text-yellow-700"
         >
@@ -95,8 +101,7 @@
               :class="{
                 'border-red-500': [
                   'The password field is required',
-                  'The password field must be at least 6 characters',
-                  'The password field confirmation does not match'
+                  'The password field must be at least 6 characters'
                 ].includes(authStore.error)
               }"
               type="password"
@@ -140,7 +145,8 @@
         </div>
         <button
           v-else
-          @click="signIn"
+          :disabled="authStore.successResponse !== ''"
+          @click="signUp"
           class="mt-5 w-full rounded-lg bg-green-500 p-2 text-white hover:bg-green-600"
         >
           Sign up
@@ -162,7 +168,7 @@ const email = ref('')
 const password = ref('')
 const password_confirmation = ref('')
 
-async function signIn() {
+async function signUp() {
   await authStore.auth(
     {
       name: name.value,
@@ -172,5 +178,9 @@ async function signIn() {
     },
     'signup'
   )
+  name.value = ''
+  email.value = ''
+  password.value = ''
+  password_confirmation.value = ''
 }
 </script>
