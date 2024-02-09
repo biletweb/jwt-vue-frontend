@@ -146,7 +146,6 @@ async function updateUser() {
         name: user.value.name,
         email: user.value.email
       })
-      alert('User updated successfully')
       router.push({
         name: 'users.index',
         query: { return_page: route.query.return_page }
