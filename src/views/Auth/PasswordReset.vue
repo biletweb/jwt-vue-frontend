@@ -105,10 +105,8 @@ async function sendResetLink() {
     successResponse.value = ''
     warningResponse.value = ''
     errorResponse.value = ''
-    const response = await api.get(`/auth/password/reset`, {
-      params: {
-        email: email.value
-      }
+    const response = await api.post(`/auth/password/reset`, {
+      email: email.value
     })
     successResponse.value = response.data.message
     email.value = ''
