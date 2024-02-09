@@ -9,6 +9,8 @@ import Edit from '@/views/Users/Edit.vue'
 import Create from '@/views/Users/Create.vue'
 import ProfileIndex from '@/views/Users/Profile/index.vue'
 import EmailConfirm from '@/views/Auth/EmailConfirm.vue'
+import PasswordReset from '@/views/Auth/PasswordReset.vue'
+import PasswordNew from '@/views/Auth/PasswordNew.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -71,6 +73,18 @@ const router = createRouter({
       name: 'email.confirm',
       meta: { title: 'Email confirmation' },
       component: EmailConfirm
+    },
+    {
+      path: '/auth/password/resset',
+      name: 'password.reset',
+      meta: { title: 'Password resset' },
+      component: PasswordReset
+    },
+    {
+      path: '/auth/password/reset/:token/:user',
+      name: 'password.new',
+      meta: { title: 'Password resset' },
+      component: PasswordNew
     }
   ]
 })

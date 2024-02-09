@@ -75,18 +75,27 @@
             />
           </div>
         </div>
-        <div class="flex items-center">
-          <input
-            v-model="remember_me"
-            id="remember"
-            type="checkbox"
-            class="relative h-5 w-5 cursor-pointer appearance-none rounded-md border bg-white after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:content-['\2713'] checked:border-0 checked:bg-green-500"
-          />
-          <label
-            for="remember"
-            class="ms-2 cursor-pointer text-sm font-medium text-slate-400"
-            >Remember me</label
-          >
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <input
+              v-model="remember_me"
+              id="remember"
+              type="checkbox"
+              class="relative h-5 w-5 cursor-pointer appearance-none rounded-md border bg-white after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:content-['\2713'] checked:border-0 checked:bg-green-500"
+            />
+            <label
+              for="remember"
+              class="ms-2 cursor-pointer text-sm font-medium text-green-500 hover:text-green-600"
+              >Remember me</label
+            >
+          </div>
+          <div>
+            <router-link
+              :to="{ name: 'password.reset' }"
+              class="text-sm font-medium text-green-500 hover:text-green-600"
+              >Forgot password?
+            </router-link>
+          </div>
         </div>
         <div v-if="authStore.loader" class="mt-5 flex justify-center">
           <AppLoader />
