@@ -78,10 +78,10 @@ async function loadImage(event) {
 
     // Добавление данных в объект FormData
     formData.append('avatar', file)
-    formData.append('user_id', userMe.value.id)
+    formData.append('user', userMe.value.id)
 
     try {
-      await api.post(`/users/avatar/update/${userMe.value.id}`, formData, {
+      await api.post(`/users/avatar/update`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
