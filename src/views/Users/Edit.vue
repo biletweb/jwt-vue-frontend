@@ -142,7 +142,8 @@ async function updateUser() {
 
   if (confirmed) {
     try {
-      await api.post(`/users/update/${route.params.id}`, {
+      await api.post(`/users/update`, {
+        user: route.params.id,
         name: user.value.name,
         email: user.value.email
       })
