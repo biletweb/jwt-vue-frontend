@@ -110,6 +110,7 @@
 
         <button
           v-else
+          :disabled="successResponse !== ''"
           @click="passwordNew()"
           class="mt-5 w-full rounded-lg bg-green-500 p-2 text-white hover:bg-green-600"
         >
