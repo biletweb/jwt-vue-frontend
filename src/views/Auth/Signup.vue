@@ -4,6 +4,7 @@
     <div class="w-4/12 rounded-2xl border bg-white p-5">
       <div class="flex flex-col gap-5">
         <h1 class="mb-4 text-2xl font-bold text-green-500">Sign up</h1>
+
         <div
           v-if="authStore.successResponse"
           class="mb-5 rounded-r-lg border-l-4 border-green-500 bg-green-100 p-5 text-green-700"
@@ -11,11 +12,18 @@
           {{ authStore.successResponse }}
         </div>
         <div
-          v-if="authStore.error"
+          v-if="authStore.errorResponse"
+          class="mb-5 rounded-r-lg border-l-4 border-red-500 bg-red-100 p-5 text-red-700"
+        >
+          {{ authStore.errorResponse }}
+        </div>
+        <div
+          v-if="authStore.warningResponse"
           class="mb-5 rounded-r-lg border-l-4 border-yellow-500 bg-amber-100 p-5 text-yellow-700"
         >
-          {{ authStore.error }}
+          {{ authStore.warningResponse }}
         </div>
+
         <div class="flex items-center">
           <div class="relative w-full">
             <svg
@@ -39,7 +47,7 @@
                 'border-red-500': [
                   'The name field is required',
                   'The name field must be between 2 and 100 characters'
-                ].includes(authStore.error)
+                ].includes(authStore.warningResponse)
               }"
               type="text"
               class="w-full rounded-lg border p-2 pl-10 text-slate-400 focus:outline-none"
@@ -71,7 +79,7 @@
                   'The email field is required',
                   'The email has already been taken',
                   'The email field must be a valid email address'
-                ].includes(authStore.error)
+                ].includes(authStore.warningResponse)
               }"
               type="text"
               class="w-full rounded-lg border p-2 pl-10 text-slate-400 focus:outline-none"
@@ -102,7 +110,7 @@
                 'border-red-500': [
                   'The password field is required',
                   'The password field must be at least 6 characters'
-                ].includes(authStore.error)
+                ].includes(authStore.warningResponse)
               }"
               type="password"
               class="w-full rounded-lg border p-2 pl-10 text-slate-400 focus:outline-none"
@@ -132,7 +140,7 @@
               :class="{
                 'border-red-500': [
                   'The password field confirmation does not match'
-                ].includes(authStore.error)
+                ].includes(authStore.warningResponse)
               }"
               type="password"
               class="w-full rounded-lg border p-2 pl-10 text-slate-400 focus:outline-none"
@@ -145,7 +153,6 @@
         </div>
         <button
           v-else
-          :disabled="authStore.successResponse !== ''"
           @click="signUp"
           class="mt-5 w-full rounded-lg bg-green-500 p-2 text-white hover:bg-green-600"
         >
@@ -162,7 +169,6 @@ import { ref } from 'vue'
 import AppLoader from '@/components/AppLoader.vue'
 
 const authStore = useAuthStore()
-
 const name = ref('')
 const email = ref('')
 const password = ref('')
@@ -178,9 +184,5 @@ async function signUp() {
     },
     'signup'
   )
-  name.value = ''
-  email.value = ''
-  password.value = ''
-  password_confirmation.value = ''
 }
 </script>

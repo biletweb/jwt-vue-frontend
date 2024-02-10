@@ -4,12 +4,26 @@
     <div class="w-4/12 rounded-2xl border bg-white p-5">
       <div class="flex flex-col gap-5">
         <h1 class="mb-4 text-2xl font-bold text-green-500">Sign in</h1>
+
         <div
-          v-if="authStore.error"
+          v-if="authStore.successResponse"
+          class="mb-5 rounded-r-lg border-l-4 border-green-500 bg-green-100 p-5 text-green-700"
+        >
+          {{ authStore.successResponse }}
+        </div>
+        <div
+          v-if="authStore.errorResponse"
+          class="mb-5 rounded-r-lg border-l-4 border-red-500 bg-red-100 p-5 text-red-700"
+        >
+          {{ authStore.errorResponse }}
+        </div>
+        <div
+          v-if="authStore.warningResponse"
           class="mb-5 rounded-r-lg border-l-4 border-yellow-500 bg-amber-100 p-5 text-yellow-700"
         >
-          {{ authStore.error }}
+          {{ authStore.warningResponse }}
         </div>
+
         <div class="flex items-center">
           <div class="relative w-full">
             <svg
@@ -35,7 +49,7 @@
                   'The email has already been taken',
                   'The email field must be a valid email address',
                   'Invalid credentials'
-                ].includes(authStore.error)
+                ].includes(authStore.warningResponse)
               }"
               type="text"
               class="w-full rounded-lg border p-2 pl-10 text-slate-400 focus:outline-none"
@@ -67,7 +81,7 @@
                   'The password field is required',
                   'The password field must be at least 6 characters',
                   'Invalid credentials'
-                ].includes(authStore.error)
+                ].includes(authStore.warningResponse)
               }"
               type="password"
               class="w-full rounded-lg border p-2 pl-10 text-slate-400 focus:outline-none"

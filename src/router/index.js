@@ -122,7 +122,9 @@ router.beforeEach((to, from, next) => {
   ) {
     next({ name: 'signin' })
   } else {
-    authStore.error = null
+    authStore.successResponse = null
+    authStore.warningResponse = null
+    authStore.errorResponse = null
     next()
   }
 

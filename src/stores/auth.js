@@ -11,13 +11,15 @@ export const useAuthStore = defineStore('auth', () => {
     token_type: ''
   })
   const successResponse = ref('')
-  const error = ref('')
+  const warningResponse = ref('')
+  const errorResponse = ref('')
   const loader = ref(false)
 
   const auth = async (payload, type) => {
     const authUrl = ref('')
     successResponse.value = ''
-    error.value = ''
+    warningResponse.value = ''
+    errorResponse.value = ''
     loader.value = true
 
     if (type === 'signup') {
@@ -48,43 +50,48 @@ export const useAuthStore = defineStore('auth', () => {
     } catch (err) {
       switch (err.response.data.error.message) {
         case 'The name field is required.':
-          error.value = 'The name field is required'
+          warningResponse.value = 'The name field is required'
           break
         case 'The name field must be between 2 and 100 characters.':
-          error.value = 'The name field must be between 2 and 100 characters'
+          warningResponse.value =
+            'The name field must be between 2 and 100 characters'
           break
         case 'The email field is required.':
-          error.value = 'The email field is required'
+          warningResponse.value = 'The email field is required'
           break
         case 'The email has already been taken.':
-          error.value = 'The email has already been taken'
+          warningResponse.value = 'The email has already been taken'
           break
         case 'The email field must be a valid email address.':
-          error.value = 'The email field must be a valid email address'
+          warningResponse.value =
+            'The email field must be a valid email address'
           break
         case 'The password field is required.':
-          error.value = 'The password field is required'
+          warningResponse.value = 'The password field is required'
           break
         case 'The password field must be at least 6 characters.':
-          error.value = 'The password field must be at least 6 characters'
+          warningResponse.value =
+            'The password field must be at least 6 characters'
           break
         case 'The password field confirmation does not match.':
-          error.value = 'The password field confirmation does not match'
+          warningResponse.value =
+            'The password field confirmation does not match'
           break
         case 'Unauthorized':
-          error.value = 'Invalid credentials'
+          warningResponse.value = 'Invalid credentials'
           break
         case 'Too Many Requests':
-          error.value = 'Too many requests'
+          warningResponse.value = 'Too many requests'
           break
         case 'You have not confirmed email':
-          error.value = 'You have not confirmed email'
+          warningResponse.value = 'You have not confirmed email'
           break
         case 'Failed to send confirmation email, try again later':
-          error.value = 'Failed to send confirmation email, try again later'
+          errorResponse.value =
+            'Failed to send confirmation email, try again later'
           break
         default:
-          error.value = 'Something went wrong'
+          errorResponse.value = 'Something went wrong'
           break
       }
       console.log(err.response.data.error.message)
@@ -99,5 +106,13 @@ export const useAuthStore = defineStore('auth', () => {
     router.push({ name: 'home' })
   }
 
-  return { userInfo, auth, logout, error, successResponse, loader }
+  return {
+    userInfo,
+    auth,
+    logout,
+    successResponse,
+    warningResponse,
+    errorResponse,
+    loader
+  }
 })

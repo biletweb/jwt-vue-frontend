@@ -42,7 +42,6 @@
 
         <button
           v-else
-          :disabled="successResponse !== ''"
           @click="confirmEmail(token, user)"
           class="rounded-lg bg-green-500 p-2 text-white hover:bg-green-600"
         >
