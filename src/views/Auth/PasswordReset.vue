@@ -125,6 +125,11 @@ async function sendResetLink() {
         console.log('Email not found')
         errorResponse.value = 'Email not found'
         break
+      case 'Failed to send password reset email, try again later':
+        console.log('Failed to send password reset email, try again later')
+        errorResponse.value =
+          'Failed to send password reset email, try again later'
+        break
       default:
         console.log('Something went wrong')
         errorResponse.value = 'Something went wrong'
