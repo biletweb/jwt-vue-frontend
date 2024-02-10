@@ -194,6 +194,7 @@ async function createUser() {
     })
     router.push({ name: 'users.index' })
   } catch (err) {
+    console.log(err.response.data.error.message)
     switch (err.response.data.error.message) {
       case 'The name field is required.':
         error.value = 'The name field is required'
